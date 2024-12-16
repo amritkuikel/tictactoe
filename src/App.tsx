@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Users, RefreshCw, Cpu, Copy } from "lucide-react";
@@ -402,10 +403,7 @@ function calculateWinner(squares: SquareValue[]): WinnerResult {
   return null;
 }
 
-// (Previous code remains the same, adding the rest of the getAIMove function)
-
 function getAIMove(squares: SquareValue[]): number {
-  // Check for winning move
   for (let i = 0; i < squares.length; i++) {
     if (!squares[i]) {
       const testSquares = squares.slice();
@@ -415,8 +413,6 @@ function getAIMove(squares: SquareValue[]): number {
       }
     }
   }
-
-  // Check for blocking player's winning move
   for (let i = 0; i < squares.length; i++) {
     if (!squares[i]) {
       const testSquares = squares.slice();
@@ -427,12 +423,10 @@ function getAIMove(squares: SquareValue[]): number {
     }
   }
 
-  // Try to take center
   if (!squares[4]) {
     return 4;
   }
 
-  // Try to take corners
   const corners = [0, 2, 6, 8];
   const availableCorners = corners.filter((i) => !squares[i]);
   if (availableCorners.length > 0) {
@@ -441,13 +435,11 @@ function getAIMove(squares: SquareValue[]): number {
     ];
   }
 
-  // Take any available side
   const sides = [1, 3, 5, 7];
   const availableSides = sides.filter((i) => !squares[i]);
   if (availableSides.length > 0) {
     return availableSides[Math.floor(Math.random() * availableSides.length)];
   }
 
-  // This should never happen if the board isn't full
   return -1;
 }
